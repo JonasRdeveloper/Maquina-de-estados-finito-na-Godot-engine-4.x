@@ -7,7 +7,9 @@ extends CharacterBody3D
 var vida: int = vida_max
 
 # Referência ao jogador (ajuste para o seu jogo)
-@onready var jogador: Node3D = get_tree().get_first_node_in_group("jogador")  # Ou use um path
+@onready var jogador := get_tree().get_first_node_in_group("jogador") as CharacterBody3D  # Ou use um path
+@onready var area_ataque := get_node("AreaAtaque_chefe1") as Area3D
+@onready var anim_player := get_node("Anim_chefe1") as AnimationPlayer
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:

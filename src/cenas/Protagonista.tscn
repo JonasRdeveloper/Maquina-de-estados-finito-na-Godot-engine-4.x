@@ -1,15 +1,75 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2xouw0vekd4v"]
+[gd_scene load_steps=17 format=3 uid="uid://b2xouw0vekd4v"]
 
-[ext_resource type="Script" uid="uid://dfiqa63sdj5rp" path="res://src/roteiros/protagonista/antagonista.gd" id="1_2aadv"]
-[ext_resource type="Script" uid="uid://dte2erl0g8lum" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_ocioso.gd" id="3_6y858"]
-[ext_resource type="Script" uid="uid://bkvl1a77ntxyt" path="res://src/roteiros/protagonista/maquina-de-estados/maquina_de_estados.gd" id="3_7q5cy"]
-[ext_resource type="Script" uid="uid://b6jychskkvl8x" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_andando.gd" id="4_b6xnt"]
-[ext_resource type="Script" uid="uid://ddy58hvtdlw0v" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_correndo.gd" id="5_b6xnt"]
-[ext_resource type="Script" uid="uid://dathohgpih5u7" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_atacando.gd" id="6_b6xnt"]
+[ext_resource type="Script" uid="uid://dfiqa63sdj5rp" path="res://src/roteiros/antagonista/antagonista.gd" id="1_2aadv"]
+[ext_resource type="Script" uid="uid://dte2erl0g8lum" path="res://src/roteiros/antagonista/maquina-de-estados/estados/chefe1_ocioso.gd" id="3_6y858"]
+[ext_resource type="Script" uid="uid://bkvl1a77ntxyt" path="res://src/roteiros/antagonista/maquina-de-estados/maquina_de_estados.gd" id="3_7q5cy"]
+[ext_resource type="Script" uid="uid://b6jychskkvl8x" path="res://src/roteiros/antagonista/maquina-de-estados/estados/chefe1_andando.gd" id="4_b6xnt"]
+[ext_resource type="Script" uid="uid://ddy58hvtdlw0v" path="res://src/roteiros/antagonista/maquina-de-estados/estados/chefe1_correndo.gd" id="5_b6xnt"]
+[ext_resource type="Script" uid="uid://dathohgpih5u7" path="res://src/roteiros/antagonista/maquina-de-estados/estados/chefe1_atacando.gd" id="6_b6xnt"]
+[ext_resource type="Script" uid="uid://ckb07ql0opi4k" path="res://src/roteiros/antagonista/maquina-de-estados/estados/chefe1_atacando1.gd" id="7_4lnjw"]
+[ext_resource type="Script" uid="uid://cam0d6ouo64g" path="res://src/roteiros/antagonista/maquina-de-estados/estados/chefe1_atacando2.gd" id="8_ifv4g"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ninfa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmdbh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ajdpy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4lnjw"]
+
+[sub_resource type="Animation" id="Animation_4lnjw"]
+resource_name = "ataque_combo1"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AreaAtaque_chefe1/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.4618399), Vector3(0, 0, -2.097), Vector3(0, 0, -1.4618399)]
+}
+
+[sub_resource type="Animation" id="Animation_ptkcg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AreaAtaque_chefe1/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -1.4618399)]
+}
+
+[sub_resource type="Animation" id="Animation_ifv4g"]
+resource_name = "ataque_combo2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AreaAtaque_chefe1/MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -1.4618399), Vector3(0, 2.18, -1.462), Vector3(0, 0, -1.4618399)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifv4g"]
+_data = {
+&"RESET": SubResource("Animation_ptkcg"),
+&"ataque_combo1": SubResource("Animation_4lnjw"),
+&"ataque_combo2": SubResource("Animation_ifv4g")
+}
 
 [node name="Antagonista" type="CharacterBody3D"]
 script = ExtResource("1_2aadv")
@@ -35,3 +95,27 @@ script = ExtResource("5_b6xnt")
 
 [node name="Chefe1_atacando" type="Node" parent="Maquina_de_estados"]
 script = ExtResource("6_b6xnt")
+
+[node name="Chefe1_atacando1" type="Node" parent="Maquina_de_estados"]
+script = ExtResource("7_4lnjw")
+metadata/_custom_type_script = "uid://c8b3g0d41hqu"
+
+[node name="Chefe1_atacando2" type="Node" parent="Maquina_de_estados"]
+script = ExtResource("8_ifv4g")
+metadata/_custom_type_script = "uid://c8b3g0d41hqu"
+
+[node name="AreaAtaque_chefe1" type="Area3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AreaAtaque_chefe1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4618399)
+mesh = SubResource("BoxMesh_ajdpy")
+skeleton = NodePath("../../Anim_chefe1")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="AreaAtaque_chefe1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.4473743)
+shape = SubResource("BoxShape3D_4lnjw")
+
+[node name="Anim_chefe1" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ifv4g")
+}

@@ -26,7 +26,7 @@ func atualizar(delta: float) -> void:
 		if dist > 10.0:  # Após ataque, se jogador fugiu, corre atrás
 			transitado.emit(self, "Chefe1_correndo")
 		else:
-			transitado.emit(self, "Chefe1_atacando")
+			transitado.emit(self, "Chefe1_atacando1")
 
 @warning_ignore("unused_parameter")
 func atualizar_fisica(delta: float) -> void:

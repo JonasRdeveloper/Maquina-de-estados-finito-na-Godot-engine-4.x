@@ -28,7 +28,7 @@ func atualizar(delta: float) -> void:
 	var dist = chefe1.global_position.distance_to(chefe1.jogador.global_position)
 	# Se muito perto, ataca; se muito longe, para e volta a andando
 	if dist < 5.0:
-		transitado.emit(self, "Chefe1_atacando")
+		transitado.emit(self, "Chefe1_atacando2")
 	elif dist > 20.0:
 		transitado.emit(self, "Chefe1_andando")
 
