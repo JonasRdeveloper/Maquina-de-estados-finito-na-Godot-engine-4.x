@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2xouw0vekd4v"]
+
+[ext_resource type="Script" uid="uid://dfiqa63sdj5rp" path="res://src/roteiros/protagonista/antagonista.gd" id="1_2aadv"]
+[ext_resource type="Script" uid="uid://dte2erl0g8lum" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_ocioso.gd" id="3_6y858"]
+[ext_resource type="Script" uid="uid://bkvl1a77ntxyt" path="res://src/roteiros/protagonista/maquina-de-estados/maquina_de_estados.gd" id="3_7q5cy"]
+[ext_resource type="Script" uid="uid://b6jychskkvl8x" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_andando.gd" id="4_b6xnt"]
+[ext_resource type="Script" uid="uid://ddy58hvtdlw0v" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_correndo.gd" id="5_b6xnt"]
+[ext_resource type="Script" uid="uid://dathohgpih5u7" path="res://src/roteiros/protagonista/maquina-de-estados/estados/chefe1_atacando.gd" id="6_b6xnt"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ninfa"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gmdbh"]
+
+[node name="Antagonista" type="CharacterBody3D"]
+script = ExtResource("1_2aadv")
+
+[node name="MeshInstance" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ninfa")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_gmdbh")
+
+[node name="Maquina_de_estados" type="Node" parent="." node_paths=PackedStringArray("estado_inicial")]
+script = ExtResource("3_7q5cy")
+estado_inicial = NodePath("Chefe1_ocioso")
+
+[node name="Chefe1_ocioso" type="Node" parent="Maquina_de_estados"]
+script = ExtResource("3_6y858")
+
+[node name="Chefe1_andando" type="Node" parent="Maquina_de_estados"]
+script = ExtResource("4_b6xnt")
+
+[node name="Chefe1_correndo" type="Node" parent="Maquina_de_estados"]
+script = ExtResource("5_b6xnt")
+
+[node name="Chefe1_atacando" type="Node" parent="Maquina_de_estados"]
+script = ExtResource("6_b6xnt")

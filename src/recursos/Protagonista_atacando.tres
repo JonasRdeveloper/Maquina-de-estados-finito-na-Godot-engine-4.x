@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://covgj4o2jinc3"]
+
+[ext_resource type="Texture2D" uid="uid://c6w0lvg6u7trb" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="1_ri7m4"]
+
+[resource]
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("1_ri7m4")
+metallic = 0.5
+roughness = 0.5
