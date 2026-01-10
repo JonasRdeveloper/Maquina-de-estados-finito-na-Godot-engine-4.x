@@ -8,8 +8,7 @@ var chefe1: Vilao
 
 func entrar(personagem: Vilao) -> void:
 	chefe1 = personagem
-	anim_player = chefe1.get_node("Anim_chefe1")
-	area_ataque = chefe1.get_node("AreaAtaque_chefe1")
+	anim_player = chefe1.get_node("")
 	print("Entrou em AtaqueCombo2")
 	if anim_player:
 		anim_player.play("ataque_combo2")
