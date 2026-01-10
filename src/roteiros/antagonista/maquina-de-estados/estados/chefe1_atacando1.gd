@@ -30,11 +30,14 @@ func atualizar(delta: float) -> void:
 	if anim_player and not anim_player.is_playing():
 		transitado.emit(self, "Chefe1_atacando2")
 	
-	# Causar dano se jogador na área (exemplo simples)
-	for body in area_ataque.get_overlapping_bodies():
-		if body.is_in_group("jogador"):
-			pass
-			#body.vida -= 10  # Ajuste dano; use signal para dano real
+	# GUARDA: Só checa bodies SE monitoring ATIVO
+	if area_ataque and area_ataque.monitoring:
+		for body in area_ataque.get_overlapping_bodies():
+			if body.is_in_group("jogador"):
+				body.vida -= 20  # Ou emita signal para dano
+				print("Dano causado: %s" % body.vida)  # Debug opcional
+	else:
+		print("[DEBUG] Monitoring off, pulando detecção")  # Remove depois
 
 @warning_ignore("unused_parameter")
 func atualizar_fisica(delta: float) -> void:

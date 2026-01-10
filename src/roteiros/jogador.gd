@@ -1,8 +1,12 @@
 extends CharacterBody3D
 
+@export var vida_max: int = 100  # Export pra ajustar no Inspector
+var vida: int = vida_max  # Inicializa com max
+
 const SPEED: float = 5.0
 const RUN_SPEED: float = 10.0
 const JUMP_VELOCITY: float = 4.5
+
 
 func _physics_process(delta: float) -> void:
 	# Gravidade

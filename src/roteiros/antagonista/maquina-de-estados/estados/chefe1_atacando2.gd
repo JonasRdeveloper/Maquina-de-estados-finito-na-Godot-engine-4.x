@@ -34,11 +34,14 @@ func atualizar(delta: float) -> void:
 			else:
 				transitado.emit(self, "Chefe1_andando")
 	
-	# Dano mais forte no segundo golpe
-	for body in area_ataque.get_overlapping_bodies():
-		if body.is_in_group("jogador"):
-			pass
-			#body.vida -= 20  # Dano maior
+	# GUARDA: Só checa bodies SE monitoring ATIVO
+	if area_ataque and area_ataque.monitoring:
+		for body in area_ataque.get_overlapping_bodies():
+			if body.is_in_group("jogador"):
+				body.vida -= 20  # Ou emita signal para dano
+				print("Dano causado!")  # Debug opcional
+	else:
+		print("[DEBUG] Monitoring off, pulando detecção")  # Remove depois
 
 @warning_ignore("unused_parameter")
 func atualizar_fisica(delta: float) -> void:
