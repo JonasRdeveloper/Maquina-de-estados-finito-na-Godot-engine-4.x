@@ -23,6 +23,12 @@ correr={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Mundo"
+3d_physics/layer_2="Protagonista"
+3d_physics/layer_3="Inimigo"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

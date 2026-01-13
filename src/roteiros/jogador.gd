@@ -4,7 +4,7 @@ extends CharacterBody3D
 var vida: int = vida_max  # Inicializa com max
 
 const SPEED: float = 5.0
-const RUN_SPEED: float = 10.0
+const RUN_SPEED: float = 50.0
 const JUMP_VELOCITY: float = 4.5
 
 

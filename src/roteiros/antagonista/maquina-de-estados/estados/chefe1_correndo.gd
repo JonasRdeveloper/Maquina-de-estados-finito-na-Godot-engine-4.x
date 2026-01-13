@@ -1,43 +1,40 @@
-# chefe1_correndo.gd
 class_name Estado_correndo_boss1
 extends Interface_chefe1
 
 var chefe1: Vilao
-var velocidade_corrida: float = 5.0  # Dobrada da velocidade normal (ajuste no export do Vilao)
+@export var velocidade_rotacao: float = 5.0  # Velocidade de rotação suave (ajuste conforme necessário)
 
 func entrar(personagem: Vilao) -> void:
 	chefe1 = personagem
 	print("Entrou em Correndo")
-	# Ex: Tocar animação "run", partículas de poeira, som de rugido
 
 func sair() -> void:
 	print("Saiu de Correndo")
-	# Cleanup: Resetar animação se necessário
 
 @warning_ignore("unused_parameter")
 func atualizar(delta: float) -> void:
 	if not chefe1.jogador:
-		transitado.emit(self, "Chefe1_ocioso")  # Sem jogador, volta a ocioso
+		emit_signal("transitado", self, "chefe1_ocioso")
 		return
-	
 	var dist = chefe1.global_position.distance_to(chefe1.jogador.global_position)
-	# Se muito perto, ataca; se muito longe, para e volta a andando
-	if dist < 1.0:
-		transitado.emit(self, "Chefe1_atacando2")
-	elif dist > 20.0:
-		transitado.emit(self, "Chefe1_andando")
+	if dist < 7.0:
+		emit_signal("transitado", self, "chefe1_ocioso")
+	elif dist > 15.0:
+		emit_signal("transitado", self, "chefe1_andando")
+	elif dist > 25.0:
+		emit_signal("transitado", self, "chefe1_ocioso")
 
 @warning_ignore("unused_parameter")
 func atualizar_fisica(delta: float) -> void:
 	if chefe1.jogador:
-		var direcao = (chefe1.jogador.global_position - chefe1.global_position)
+		var direcao = chefe1.jogador.global_position - chefe1.global_position
 		direcao.y = 0
 		direcao = direcao.normalized()
-		
-		chefe1.velocity.x = direcao.x * velocidade_corrida
-		chefe1.velocity.z = direcao.z * velocidade_corrida
-		
-		chefe1.look_at(chefe1.jogador.global_position, Vector3.UP)
+		chefe1.desired_velocity = direcao * chefe1.velocidade_correr
+		if direcao != Vector3.ZERO:
+			# Calcula o ângulo alvo no plano XZ
+			var angulo_alvo = atan2(-direcao.x, -direcao.z)
+			# Interpola suavemente a rotação no eixo Y
+			chefe1.rotation.y = lerp_angle(chefe1.rotation.y, angulo_alvo, delta * velocidade_rotacao)
 	else:
-		chefe1.velocity.x = 0.0
-		chefe1.velocity.z = 0.0
+		chefe1.desired_velocity = Vector3.ZERO
