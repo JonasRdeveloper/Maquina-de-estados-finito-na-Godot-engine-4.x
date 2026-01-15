@@ -2,7 +2,7 @@ class_name Estado_correndo_boss1
 extends Interface_chefe1
 
 var chefe1: Vilao
-@export var velocidade_rotacao: float = 5.0  # Velocidade de rotação suave (ajuste conforme necessário)
+@export var velocidade_rotacao: float = 25.0
 
 func entrar(personagem: Vilao) -> void:
 	chefe1 = personagem

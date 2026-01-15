@@ -1,4 +1,4 @@
-# antagonista.gd
+## res://src/roteiros/antagonista/antagonista.gd
 class_name Vilao
 extends CharacterBody3D
 
@@ -17,14 +17,14 @@ const PERSONAL_SPACE : float = 1.5      # distância mínima para aplicar repuls
 const RETREAT_SPEED : float = 2.0       # velocidade de recuo quando jogador está muito perto
 const DEADZONE : float = 0.05           # zera micro-movimentos
 
-# Referências (ajuste caminhos no Inspector se necessário)
+## Referências (ajuste caminhos no Inspector se necessário)
 @onready var jogador := get_tree().get_first_node_in_group("jogador") as CharacterBody3D
 @onready var anim_tree := $Arvore_de_animacoes as AnimationTree
 @export var player_mesh : Node3D  # arraste seu nó de mesh no Inspector
 @onready var maquina_estados := $Maquina_de_estados as Node  # ajuste se o nó estiver em outro caminho
 
 # Movimento
-var desired_velocity: Vector3 = Vector3.ZERO  # valor que estados costumavam definir
+var desired_velocity: Vector3 = Vector3.ZERO
 var target_velocity: Vector3 = Vector3.ZERO   # alvo final (após lógica de estados + repulsão)
 # 'velocity' vem de CharacterBody3D
 
@@ -83,9 +83,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# 9) Usa a velocidade efetiva após move_and_slide para rotação e animação
-	_update_rotation_and_animation(delta, vel_h)
+	_atualizar_rotacao_e_animacao(delta, vel_h)
 
-func _update_rotation_and_animation(delta: float, vel_h: Vector3) -> void:
+func _atualizar_rotacao_e_animacao(delta: float, vel_h: Vector3) -> void:
 	# Rotação suave ignorando Y (usa velocidade efetiva)
 	if vel_h.length_squared() > 0.0001 and player_mesh:
 		var target_yaw = atan2(vel_h.x, vel_h.z)
@@ -105,8 +105,3 @@ func _update_rotation_and_animation(delta: float, vel_h: Vector3) -> void:
 		var path = "parameters/Movimento_terrestre/blend_amount"
 		var current = anim_tree.get(path)
 		anim_tree.set(path, lerp(current, blend_target, delta * ANIMATION_BLEND))
-
-func _on_area_ataque_body_entered(body: Node3D) -> void:
-	if body.is_in_group("jogador") and body.has_method("receber_dano"):
-		body.receber_dano(20)
-	print("Ataque acertou!")
